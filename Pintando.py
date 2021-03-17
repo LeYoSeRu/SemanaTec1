@@ -1,15 +1,5 @@
-"""Paint, for drawing shapes.
-Exercises
-1. Add a color.
-2. Complete circle.
-3. Complete rectangle.
-4. Complete triangle.
-5. Add width parameter.
-"""
-
-
 from turtle import *
-from freegames import vector
+from freegames import vector 
 
 def line(start, end):
     "Draw line from start to end."
@@ -35,7 +25,7 @@ def circulo(start, end):
     #Declarar punto de inicio
     up()
     goto(start.x, start.y)
-    #Declarar punto final 
+    #Declarar puntos de la circunferencia 
     down()
     #Comenzar a llenar la figura
     begin_fill()
@@ -44,13 +34,47 @@ def circulo(start, end):
     #Terminar el llenado
     end_fill()
 
+
+
 def rectangle(start, end):
     "Draw rectangle from start to end."
-    pass  # TODO
+    #Extremo inicial del vector que traza la figura
+    up()
+    goto(start.x, start.y)
+
+    #Extremo que va a cambiar de coordenadas para describir la figura del rectángulo
+    down()
+    #Inicializar el llenado del contorno de la figura
+    begin_fill()
+
+    #Ciclo que traza el rectángulo en dos pasos, primero traza la base descrita por la diferencia entre el punto inicial y final en x, luego gira a 90 grados hacia la izquierda y avanza la distancia correspondiente 
+    #a la diferencia de puntos de y para trazar la altura del rectángulo y vuelve a girar 90 grados a la izquierda. El proceso se repite 2 veces y para cerrar el contorno de la figura y se termina el llenado. 
+    for count in range(2):
+        forward(end.x - start.x)
+        left(90)
+        forward(end.y - start.y)
+        left(90)
+
+    end_fill()
 
 def triangle(start, end):
     "Draw triangle from start to end."
-    pass  # TODO
+    #Declarar el punto inicial como el primer vértice de la figura
+    up()
+    goto(start.x, start.y)
+
+    #Declar el segundo punto del vector 
+    down()
+    #Inicializar el llenado
+    begin_fill()
+    #Mover el segundo punto del vector una distancia equivalente a la diferencia entre las coordenadas x del primer punto y el segundo y rotar 120 grados hacia la izquierda, repetir este paso 3 veces para completar 
+    #el perímetro del triángulo
+    for count in range(3):
+        forward(end.x - start.x)
+        left(120)
+    #Finalizar el llenado
+    end_fill()
+    
 
 def tap(x, y):
     "Store starting point or draw shape."
@@ -73,6 +97,8 @@ setup(420, 420, 370, 0)
 onscreenclick(tap)
 listen()
 onkey(undo, 'u')
+onkey(lambda: color('black'), 'K')
+onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
 onkey(lambda: color('blue'), 'B')
 onkey(lambda: color('red'), 'R')
